@@ -1,7 +1,13 @@
 <?php
-    set_time_limit(10);
+    set_time_limit(120);
     libxml_use_internal_errors(true);
 
+    /**
+     * Get the list of urls that meet a certain criteria, including being '#' or '/' character only.
+     * 
+     * requires the list of string urls to filter out from and
+     * returns a list of new urls that obey the specified filters.
+     */
     function filter_urls($urls) {
         $new_urls = array();
         foreach($urls as $url) {
@@ -12,11 +18,23 @@
         return $new_urls;
     }
 
+    /**
+     * Get the domain name (www.google.com) less the http://.
+     * 
+     * requires the complete string url with the protocol, domain name and path parameters if any and
+     * returns a new url that is the base url for other pages.
+     */
     function extract_domain_name($url) {
         $domain_url = explode("/", $url)[2];
         return $domain_url;
     }
 
+    /**
+     * Determine if the link in question is an absolute URL or a relative URL.
+     * 
+     * requires a string url
+     * returns 1 if the url is relative (/wiki/Article), and 0 if it is absolute (www.google.com/search/...).
+     */
     function should_crawl($url, $starting_urls) {
         foreach ($starting_urls as $starting_url) {
             if ($url[0] == '/') return 1;
@@ -25,11 +43,23 @@
         return -1;
     }
 
+    /**
+     * Get the url prefix (with the http part). Basically the extract_domain_name function with an added http:// part.
+     * 
+     * requires the absolute string url to extract the name of and
+     * returns a url containing a joined http:// before the domain name.
+     */
     function extract_url_prefix($url) {
         $url_parts = explode("/", $url);
         return $url_parts[0].'//'.$url_parts[2];
     }
-    
+
+    /**
+     * Get the text part only, from the DOMXPath elements that have been extracted from the DOMDocument.
+     * 
+     * requires the DOMXPath object to extract text content from and
+     * returns the text content inside that object.
+     */
     function extract_dom_xelements($dom_x_elements){
         $output = '';
         foreach ($dom_x_elements as $dom_x_element) {
@@ -39,21 +69,43 @@
         return $output;
     }
 
+    // Global list of urls that have been explored already. Contains disallowed urls from the robots.txt file as well.
     $EXPLORED_URLS = array('/');
 
+    /**
+     * Mark a certain url as visited by pushing it into the global array of explored urls.
+     * 
+     * requries a string url that has been explored and
+     * returns nothing.
+     */
     function mark_explored($url) {
         global $EXPLORED_URLS;
         array_push($EXPLORED_URLS);
     }
 
+    /**
+     * Checks to see if the url under process is one from the global list of explored urls.
+     * 
+     * requries a string url to check the exploration status of and
+     * returns true if the link has been explored already, false otherwise.
+     */
     function is_explored($url) {
         global $EXPLORED_URLS;
         if (array_search($url, $EXPLORED_URLS)) return true;
         else return false;
     }
 
+    // Include the robots.txt file to for the crawler to adhere to.
     include('robots_reader.php');
 
+    /**
+     * Main system loop that looks for the content on pages, cleans them out and writes them to corresponding indexed file.
+     * 
+     * requires a seed url, a string url to start the seeding process,
+     * a depth, indicating how deep must the code go, in the url tree to read the content,
+     * an array of urls that checks for the allowed base urls to allow the search of data from and
+     * returns nothing 
+     */
     function crawl_page($url,$depth=2, $starting_urls=array())
     {
         echo "Reading: ".$url;
@@ -99,10 +151,6 @@
             // Extract only requried content to be written to a file
             $title = $xpath->query('//title');
             $divs = $xpath->query('//div');
-            // $paragraphs = $xpath->query('//p');
-            // extract_dom_xelements($paragraphs).
-            // $lists = $xpath->query('//li');
-            // extract_dom_xelements($lists).
             $heads = $xpath->query('//h');
             
             // Persistence; saving the read data in plain text form in the storage
