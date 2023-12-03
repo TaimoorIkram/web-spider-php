@@ -1,4 +1,4 @@
-# Simple Web Spider as Assignment 2 of Web Engineering
+# Simple Web Spider
 Made by Taimoor Ikram, BESE 12-A, SEECS, NUST
 ## About this Code
 The code features a simple web crawler software that can surf the page for 2 minutes to recursively fetch the HTML content, filter out the headings and div contents, strip it off its tags and place that content into appropriately indexed HTML file. The code is divided into three main modules.
