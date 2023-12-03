@@ -5,7 +5,7 @@ The code features a simple web crawler software that can surf the page for 2 min
 2. **The Search Engine** that searches through the appropriately indexed files and returns all the lines where that particular data exists. There are two ways you can search for items in this module.
    a. Using normal text based search.
    b. Using regular expressions.
-3. The Robot File Reader is a submodule of the Crawler Engine that is only responsible for reading the ```BASE_URL/robots.txt``` file from the seeding webpage.
+3. The **Robots File Reader** is a submodule of the Crawler Engine that is only responsible for reading the ```BASE_URL/robots.txt``` file from the seeding webpage.
 
 ## Getting Started
 Follow the steps hereunder to set up your php project to work with the XAMPP utility.
@@ -26,12 +26,11 @@ Follow the steps hereunder to set up your php project to work with the XAMPP uti
 4. URL Extraction
 5. Depth Limit
 6. Output
-7. Robots Handling (robots.txt)
+7. Robots.txt Compliance (robots.txt)
 8. Content Search Module
 9. Error Handling (Timeouts, File Not Found, Robot File Not Present)
 10. Persistent Storage (Flat Files)
 11. Advanced Regex Searching
 
 ## Credits
-Taimoor Ikram (373681)
-BESE 12
+Taimoor Ikram
