@@ -12,7 +12,7 @@
 </div>
 <form id='seed_form'>
     <div class='search-container' style='background-color: var(--card-blue);'>
-        <input type=text class='search bar' id='seed_url' name='seedurl' placeholder='http://www.foxsports.com/'/>
+        <input type=text class='search bar' id='seed_url' name='seedurl' placeholder='http://www.foxsports.com'/>
         <input type='submit' id='seed_button' class='button' value='Start Seed'/>
         <p>This will take several moments...</p>
     </div>
