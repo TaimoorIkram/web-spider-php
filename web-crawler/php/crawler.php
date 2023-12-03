@@ -49,6 +49,13 @@
         }
     }
 ?>
+<link rel='stylesheet' href='../css/styles.css'/>
+<script>
+    seed_button.addEventListener('click', (e) => {
+        seed_form.classList.add('disabled');
+        seed_url.setAttribute('readonly', true);
+    })
+</script>
 </section>
 </body>
 </html>
