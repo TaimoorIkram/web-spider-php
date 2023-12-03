@@ -22,13 +22,23 @@ Follow the steps hereunder to set up your php project to work with the XAMPP uti
 
 ## Key features.
 1. URL Queueing helps manage URLs for the crawler to explore one after the other. They are progressively marked as explored so other identical URLs are ignored.
+
 2. Crawling feature is the key feature of this software as the code moves from one explored HTML page to the next, based on what URL is next in its recursive queue.
+
 3. HTML Parsing enables the module to filter out, for now, only the heading and div contents for them to be safely stored on a local file, free of any scripts and stylesheets.
+
 4. URL Extraction obtains the URL of the webpage and stores it using a *crawler-specific template language* that helps locate the urls easily. These tags are present at the top of the file and are unique so they can be found quickly by the system during recursive search processes.
+
 5. Depth Limit is a must when it comes to recursive searching, and in this case, the depth of the URLs has been set to 2 by default. However, though it isnt advisable, the limit can be changed in the sourcecode but it is generally not required.
+
 6. Output for the scrapped URLs is displayed on the screen letting the user know what URLs have successfully been scraped. *Please note that the last URL may or may not be explored, which depends on the timing of the 2 minute mark that stops the scripts from running further*. 
+
 7. Robots.txt Compliance (robots.txt) ensures that whenever a seed is sown, the robot files for that seed that govern the URL protection of some of the routes are not explored.
+
 8. Content Search Module enables searching from the scraped data that is locally always stored inside the ```web-crawler/data``` folder.
+
 9. Error Handling (Timeouts, File Not Found, Robot File Not Present) has been implemented to ensure proper graceful exits in case of unintended exceptions.
+
 10. Persistent Storage (Flat Files) to keep a record of scraped data. These files are inside the ```web-crawler/data``` folder and are *overridden* on every new search to protect it from duplicate data.
+
 11. Advanced Regex Searching helps find data quicker using more specific text formatting, allowing more exact search to take place.
