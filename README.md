@@ -1,7 +1,5 @@
 # Simple Web Spider
 Made by Taimoor Ikram, BESE 12-A, SEECS, NUST
-![Crawler Menu](assets/crawler.png)
-![Search Menu](assets/search.png)
 
 ## About this Code
 The code features a simple web crawler software that can surf the page for 2 minutes to recursively fetch the HTML content, filter out the headings and div contents, strip it off its tags and place that content into appropriately indexed HTML file. The code is divided into three main modules.
@@ -57,3 +55,7 @@ Follow the steps hereunder to set up your php project to work with the XAMPP uti
 10. Persistent Storage (Flat Files) to keep a record of scraped data. These files are inside the ```web-crawler/data``` folder and are *overridden* on every new search to protect it from duplicate data.
 
 11. Advanced Regex Searching helps find data quicker using more specific text formatting, allowing more exact search to take place.
+
+## Gallery
+![Crawler Menu](assets/crawler.png)
+![Search Menu](assets/search.png)
