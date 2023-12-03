@@ -108,8 +108,4 @@
         }
         echo " ... complete! ".'<br>';
     }
-
-    $seed_prefix = extract_url_prefix($seed_url);
-    $domain_allowed = array(extract_domain_name($seed_url));
-    crawl_page($seed_url,2, $domain_allowed);
 ?>
