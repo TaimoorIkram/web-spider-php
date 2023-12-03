@@ -52,6 +52,8 @@
         else return false;
     }
 
+    include('robots_reader.php');
+
     function crawl_page($url,$depth=2, $starting_urls=array())
     {
         echo "Reading: ".$url;
@@ -108,4 +110,6 @@
         }
         echo " ... complete! ".'<br>';
     }
+
+    read_robot($seed_url);
 ?>
