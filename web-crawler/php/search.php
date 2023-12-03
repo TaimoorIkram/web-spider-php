@@ -42,28 +42,35 @@ function search_within_file($regex, $file_lines) {
 
     <div class='table'>
     <?php
-        
-        $search_item = "NFL";
-        $regex = "/\\b(?:$search_item)\\b/i";
-        
-        // System loop that extracts the results, obtains the associated title and url and displays it to the user with all the lines containing the correct results.
-        for ($filename=0; $filename < 1000; $filename++) { 
-            try {
-                $path = "../data/$filename.html";
-                $file_lines = file($path, FILE_IGNORE_NEW_LINES);
-                $a_href = search_unique_item_within_file($file_lines, "url");
-                $search_results = search_within_file($regex, $file_lines);
-                echo "<div class='row' style='background-color: var(--card-blue);'>";
-                echo "<div class='item head'><h2><a href='$a_href'>".$a_href."</a></h2>";
-                echo "<p style='font-weight: 300px;'>From the URL ".$a_href."</p><div>";
-                foreach ($search_results as $line_number => $line) {
-                    echo "<div class='item'>$line</div>";
+    
+       if ($_SERVER['REQUEST_METHOD'] == 'GET'){
+        if(isset($_GET['search'])){
+            $search_item = $_GET['search'];
+            $regex = "/\\b(?:$search_item)\\b/i";
+            
+            // System loop that extracts the results, obtains the associated title and url and displays it to the user with all the lines containing the correct results.
+            for ($filename=0; $filename < 1000; $filename++) { 
+                try {
+                    $path = "../data/$filename.html";
+                    if (!file_exists($path)) continue; 
+                    $file_lines = file($path, FILE_IGNORE_NEW_LINES);
+                    $a_href = search_unique_item_within_file($file_lines, "url");
+                    $a_title = search_unique_item_within_file($file_lines, "title");
+                    $search_results = search_within_file($regex, $file_lines);
+                    if (!isset($search_results)) continue;
+                    echo "<div class='row' style='background-color: var(--card-blue);'>";
+                    echo "<div class='item head'><h2><a href='$a_href'>".$a_title."</a></h2>";
+                    echo "<p style='font-weight: 300px;'>From the URL ".$a_href."</p></div>";
+                    foreach ($search_results as $line_number => $line) {
+                        echo "<div class='item'>$line</div>";
+                    }
+                    echo "</div>";
+                } catch (Throwable $th) {
+                    echo "Unable to find file.";
                 }
-                echo "</div>";
-            } catch (Throwable $th) {
-                echo "Unable to find file.";
             }
         }
+    }
     ?>
     </div>
     </section>
